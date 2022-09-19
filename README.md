@@ -17,4 +17,6 @@ plug.off()
 plug.auto_off(3600)
 # Set a schedule (HHMM-MTWTFSS-on|off).
 plug.schedule(['0730-0123456-on', '0830-0123456-off'])
+# Control the LED behaviour.
+plug.led_disable(power=False, status=True)
 ```

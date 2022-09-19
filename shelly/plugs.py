@@ -13,6 +13,7 @@ Example
     plug.off()
     plug.auto_off(60*5)
     plug.schedule(['0730-0123456-on', '0830-0123456-off'])
+    plug.led_disable(power=False, status=True)
 
 
 Notes
@@ -72,3 +73,7 @@ class PlugS(Gen1Device):
 
     def schedule(self, value: List[str]) -> None:
         self._relay[0].schedule(value)
+
+    def led_disable(self, power: bool, status: bool) -> None:
+        self.api_post('settings', {'led_power_disable': power, 'led_status_disable': status})
+        super().reload()
