@@ -11,6 +11,8 @@ Example
     plug = PlugS(ip='192.168.33.1')
     plug.on()
     plug.off()
+    plug.auto_off(60*5)
+    plug.schedule(['0730-0123456-on', '0830-0123456-off'])
 
 
 Notes
@@ -34,6 +36,7 @@ Schedule items are a string with format HHMM-MTWTFSS-on|off (MTWTFSS are days of
 
 """
 
+from typing import Dict, List
 from .gen1 import Gen1Device
 from .gen1.components import Actions, Meter, Relay
 
@@ -54,8 +57,19 @@ class PlugS(Gen1Device):
             r.reload()
         self._actions.reload()
 
+    @property
+    def status(self) -> Dict[str, str]:
+        return {}
+
     def off(self) -> None:
         self._relay[0].off()
 
     def on(self) -> None:
         self._relay[0].on()
+
+    def auto_off(self, seconds: int) -> None:
+        self._relay[0].auto_off(seconds)
+
+    def schedule(self, value: List[int]) -> None:
+        self._relay[0].schedule(value)
+    

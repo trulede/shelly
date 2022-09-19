@@ -1,4 +1,5 @@
 
+from typing import List
 from ... import Device
 
 
@@ -30,3 +31,16 @@ class Relay:
     def off(self) -> None:
         self._device.api_post(f'relay/{self.id}', {'turn': 'off'})
         self.reload()
+
+    def auto_off(self, seconds: int) -> None:
+        self._device.api_post(f'settings/relay/{self.id}', {'auto_off': seconds})
+        self.reload()
+
+    def schedule(self, schedule_rules: List[int] = list()) -> None:
+        data = { 
+            'schedule': True if len(schedule_rules) else False,
+            'schedule_rules' : [x for x in schedule_rules],  # FIXME: schedule_rules are not correctly encoded.
+        }
+        self._device.api_post(f'settings/relay/{self.id}', data)
+        self.reload()
+

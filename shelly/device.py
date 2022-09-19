@@ -32,8 +32,7 @@ class Device:
         url = f'http://{self.ip}/{query}'
         
         print(f'POST: {url}')
-        pprint(data, indent=4)
-        response = requests.post(url, params=data)
+        response = requests.post(url, data=data)
         print(f'STATUS: {response.status_code}')
         pprint(response.json(), indent=4)
 
