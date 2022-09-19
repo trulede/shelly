@@ -70,6 +70,5 @@ class PlugS(Gen1Device):
     def auto_off(self, seconds: int) -> None:
         self._relay[0].auto_off(seconds)
 
-    def schedule(self, value: List[int]) -> None:
+    def schedule(self, value: List[str]) -> None:
         self._relay[0].schedule(value)
-    
