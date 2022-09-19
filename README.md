@@ -1,6 +1,6 @@
 # Shelly
 
-Shelly device automation.
+Shelly device automation via HTTP API, without Shelly Cloud or Smartphone App.
 
 
 ## Devices
